@@ -1,0 +1,31 @@
+//main window
+function createWindow(width: any, height: any) {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+    width: width,
+    height: height,
+    fullscreen: false,
+    webPreferences: {
+      contextIsolation: true,
+      preload: path.join(__dirname, "/preload.js"),
+    },
+  });
+  mainWindow.loadFile(path.join(__dirname, "../index.html"));
+}
+
+//second window
+function createPopupWindow(width: any, height: any) {
+  popupWindow = new BrowserWindow({ 
+    height: 300,
+    width: 400,
+    x: width - 400,
+    y: height - 300,
+
+    webPreferences: {
+      contextIsolation: true,
+      preload: path.join(__dirname, "/preload.js"),
+    },
+  });
+  Menu.setApplicationMenu(null);
+  popupWindow.loadURL("http://localhost:3000/#/report"); // The problem is this line
+}
